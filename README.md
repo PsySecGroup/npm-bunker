@@ -1,10 +1,10 @@
 # npm-bunker
 
-Sacrificial sandbox for analyzing npm packages for malicious behavior.
+Sacrificial sandbox for analyzing `npm` packages for malicious behavior.
 Pass a package name and version — it fetches the tarball safely on the host,
 detonates it inside a hardened isolated container, and produces a structured
 report covering static analysis, network activity, filesystem changes, syscall
-traces, and HTTP payload inspection including env var exfil detection.
+traces, and HTTP payload inspection including `env` var exfil detection.
 
 ---
 
@@ -23,8 +23,8 @@ Install: https://docs.docker.com/engine/install/
 
 ### Node.js + npm
 
-npm is used on the host to fetch tarballs and pre-warm the dependency cache.
-Any recent version (16+) works. nvm installs are supported.
+`npm` is used on the host to fetch tarballs and pre-warm the dependency cache.
+Any recent version (16+) works. `nvm` installs are supported.
 
 ```bash
 # Verify
@@ -73,11 +73,11 @@ groups | grep docker   # should print 'docker'
 docker info            # should succeed without sudo
 ```
 
-### Option B — Docker not in group (more secure, your setup)
+### Option B — Docker not in group (more secure)
 
 If you've intentionally removed Docker from your user groups, prefix with
 `sudo -E`. The `-E` flag preserves your environment including `$PATH`,
-which is required so npm can be found (nvm installs live in `$HOME`):
+which is required so `npm` can be found (nvm installs live in `$HOME`):
 
 ```bash
 sudo -E ./scan.sh lodash
@@ -86,7 +86,7 @@ sudo -E ./reset.sh --results
 ```
 
 Why `-E` and not just `sudo`? Plain `sudo` resets `$PATH` to a minimal
-system path. npm installed via nvm lives in `/home/you/.nvm/...` which
+system path. `npm` installed via nvm lives in `/home/you/.nvm/...` which
 disappears under a bare sudo. `-E` passes your full environment through.
 
 ### Option C — Explicit override
@@ -193,7 +193,7 @@ reset.sh              cleanup: containers, image, networks, volumes, results
 
 ### Host side (`scan.sh`)
 
-1. Locates npm (handles nvm, sudo PATH stripping, explicit override)
+1. Locates `npm` (handles `nvm`, sudo PATH stripping, explicit override)
 2. `npm pack` — downloads tarball from registry, no script execution
 3. `npm install --ignore-scripts` — pre-warms full dep cache on host
 4. Runs the hardened container with tarball + cache bind-mounted in
