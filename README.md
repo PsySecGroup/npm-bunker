@@ -54,7 +54,7 @@ sudo docker build -t npm-sandbox .
 
 ## Docker invocation — which command to use
 
-npm-bunker auto-detects how to invoke Docker. Depending on your setup,
+`npm-bunker` auto-detects how to invoke Docker. Depending on your setup,
 use one of the following approaches:
 
 ### Option A — Docker group (default Ubuntu/Mac install)
